@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knihovna promptů - AI v pedagogické praxi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2d3748;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: #4a5568;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px;
+            gap: 10px;
+        }
+
+        nav button {
+            background: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        nav button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .prompt-card {
+            background: #f7fafc;
+            border-left: 5px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .prompt-card:hover {
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+            transform: translateX(5px);
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .prompt-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .prompt-title {
+            flex: 1;
+            font-size: 1.3rem;
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .prompt-text {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+            line-height: 1.8;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .rules-section {
+            background: #edf2f7;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .rules-section h3 {
+            color: #667eea;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .rules-section h3:first-child {
+            margin-top: 0;
+        }
+
+        .rules-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .rules-section li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .rules-section li::before {
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .rules-section .allowed li::before {
+            content: "✅";
+        }
+
+        .rules-section .forbidden li::before {
+            content: "❌";
+        }
+
+        .rules-section .required li::before {
+            content: "📝";
+        }
+
+        .rules-section .defense li::before {
+            content: "🎯";
+        }
+
+        .rules-section .warning li::before {
+            content: "⚠️";
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: none;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav button {
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .prompt-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Knihovna promptů</h1>
+            <p>AI v pedagogické praxi | Vladimíra Jurasová, FŽP ČZU 2026</p>
+        </header>
+
+        <nav>
+            <button onclick="showSection('priprava')" class="active">📝 Příprava</button>
+            <button onclick="showSection('vyuka')">👩‍🏫 Výuka</button>
+            <button onclick="showSection('hodnoceni')">✅ Hodnocení</button>
+            <button onclick="showSection('pravidla')">📋 Pravidla</button>
+        </nav>
+
+        <div class="content">
+            <!-- PŘÍPRAVA -->
+            <div id="priprava" class="section active">
+                <h2 class="section-title">📝 PROMPTY PRO PŘÍPRAVU</h2>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">1</div>
+                        <div class="prompt-title">AUDIT KURZU 2030 (relevance za 5 let)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Jsi garant oboru s výhledem k roku 2030. Projdi tento sylabus a vytipuj 5 prvků, které pravděpodobně zastarají, 5 nadčasových kompetencí a 5 návrhů na úpravy (témata, dovednosti, typy úkolů). Výstup: tabulka Zastaralé | Nadčasové | Úprava | Důvod."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 1)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">2</div>
+                        <div class="prompt-title">STRES-TEST ZADÁNÍ (AI to splní bez porozumění)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Simuluj průměrného studenta s přístupem k ChatGPT. Vyřeš toto zadání během 10 minut pouze na základě textu zadání. Uveď části, které nevyžadují porozumění, a navrhni 5 úprav, které vynutí hlubší rozhodování a obhajobu. Výstup: Slabina → Úprava → Zdůvodnění."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 2)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">3</div>
+                        <div class="prompt-title">REDESIGN ZADÁNÍ (odolné vůči AI, měřitelné porozumění)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Přepiš zadání do dvou variant (standardní / pokročilá) tak, aby vyžadovalo lokální data, obhajobu předpokladů, návrh alternativy a reflexi chyb. Přidej mini-rubriku (3 kritéria, 0–3 body) a popiš očekávané důkazy porozumění."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 3)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">4</div>
+                        <div class="prompt-title">VSTUPNÍ DIAGNOSTIKA (velké skupiny, základy + miskoncepce)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Navrhni 10–12min diagnostiku k tématu [X]: 6 konceptuálních otázek, 3 úlohy na aplikaci a 3 krátké vysvětlení. U každé otázky přidej typickou chybnou odpověď, její interpretaci a mikro-aktivitu k nápravě."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 4)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">5</div>
+                        <div class="prompt-title">ZNALOSTI BEZ POROZUMĚNÍ (odhalení principů)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Pro téma [X] vytvoř 8 otázek ve dvojicích: 'vysvětli jednoduše' a 'vysvětli odborně'. Zaměř se na odhalení porozumění mechanismům. Přidej 5 běžných miskoncepcí – ke každé uveď testovací otázku a stručnou opravu."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 5)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">6</div>
+                        <div class="prompt-title">BRIDGE PLAN (učitel znalý A, potřebuje pokrýt B)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Jsem odborník na [A], potřebuji připravit výuku tématu [B] pro cílovou skupinu [XY]. Vytvoř 'bridge plan': 10 společných principů, 10 klíčových rozdílů, 8 klíčových pojmů (s jednovětou definicí), 6 případových scénářů a doporučené minimum zdrojů."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 6)">📋 Zkopírovat prompt</button>
+                </div>
+            </div>
+
+            <!-- VÝUKA -->
+            <div id="vyuka" class="section">
+                <h2 class="section-title">👩‍🏫 PROMPTY PRO VÝUKU</h2>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">7</div>
+                        <div class="prompt-title">SOKRATOVSKÝ TUTOR (24/7, bez hotových odpovědí)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Chovej se jako sokratovský tutor k tématu [X]: nepodávej hotová řešení, ale ptej se naváděcími otázkami. Po každé odpovědi ověř pochopení, vyžádej si mezivýsledek a nabídni jen minimální nápovědu, pokud student tápe."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 7)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">8</div>
+                        <div class="prompt-title">DISKUSNÍ OPONENT (argumentace + ověření)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "V roli oponenta vygeneruj 6 protiargumentů a 3 alternativní interpretace k tomuto tvrzení. Ke každému přidej ověřovací otázku k obhajobě předpokladů. Označ 2 častá slabá místa – např. v logice, datech nebo metodice."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 8)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">9</div>
+                        <div class="prompt-title">VARIACE ZADÁNÍ (proti opisování, stejná obtížnost)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Vygeneruj 50 variant této úlohy se stejnými výukovými cíli. Zachovej logiku a vyrovnanou obtížnost, ale uprav parametry tak, aby byl každý vstup unikátní. Výstup jako tabulka: ID | parametry | zadání | očekávaný výstup | kontrolní kritérium."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 9)">📋 Zkopírovat prompt</button>
+                </div>
+            </div>
+
+            <!-- HODNOCENÍ -->
+            <div id="hodnoceni" class="section">
+                <h2 class="section-title">✅ PROMPTY PRO HODNOCENÍ</h2>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">10</div>
+                        <div class="prompt-title">EVIDENCE-OF-LEARNING BALÍČEK (hodnotit proces, ne výsledek)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Navrhni 'evidence-of-learning' balíček k tomuto typu úkolu: co student odevzdá jako proces (max 10 řádků), 3 ověřovací kroky (zdroje, testy, revize) a mini-rubriku (porozumění / argumentace / ověření; 0–3 body). Přidej 2 příklady silného vs slabého důkazu."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 10)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">11</div>
+                        <div class="prompt-title">DIAGNOSTIKA CELÉ SKUPINY (po testu)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Z těchto anonymizovaných odpovědí vytvoř diagnostiku: seskup odpovědi do 5–8 kategorií, najdi 5 typických chyb, uveď krátké komentáře k ukázkám (2 slabé, 1 silná odpověď). Navrhni 15min aktivitu na opravu dvou nejčastějších chyb."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 11)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">12</div>
+                        <div class="prompt-title">KALIBRACE HODNOCENÍ (konzistence v rozsáhlém souboru)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Zkontroluj konzistenci hodnocení podle této rubriky: vyhledej případy, kdy podobné odpovědi dostaly různé body. Navrhni zpřesnění kritérií a uveď 3 příklady 'na hraně' s doporučenou zpětnou vazbou pro studenty."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 12)">📋 Zkopírovat prompt</button>
+                </div>
+            </div>
+
+            <!-- PRAVIDLA -->
+            <div id="pravidla" class="section">
+                <h2 class="section-title">📋 PRAVIDLA PRO POUŽITÍ AI</h2>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">13</div>
+                        <div class="prompt-title">PRAVIDLA PRO POUŽITÍ AI VE VÝUCE</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Napiš stručná pravidla používání AI pro VŠ kurz (8–10 vět): co je povoleno, co ne, co musí student doložit jako proces, a jak probíhá obhajoba. Definuj také, jak postupovat při neověřených nebo halucinovaných výstupech AI."
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 13)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="rules-section">
+                    <h3>💡 PŘÍKLAD PRAVIDEL (můžete použít jako výchozí bod)</h3>
+                    <p><strong>Pravidla pro použití AI v kurzu [NÁZEV]:</strong></p>
+
+                    <h3>✅ Co je povoleno:</h3>
+                    <ul class="allowed">
+                        <li>Brainstorming, vytváření osnov, návrhy struktury</li>
+                        <li>Kontrola gramatiky a stylu</li>
+                        <li>Vysvětlení obtížných konceptů</li>
+                        <li>Generování variant a alternativních přístupů</li>
+                    </ul>
+
+                    <h3>❌ Co není povoleno:</h3>
+                    <ul class="forbidden">
+                        <li>Copy-paste AI výstupů bez kritického zhodnocení</li>
+                        <li>Předstírání vlastní práce tam, kde je AI autorem</li>
+                        <li>Odevzdání neověřených nebo halucinovaných informací</li>
+                    </ul>
+
+                    <h3>📝 Co musíte doložit:</h3>
+                    <ul class="required">
+                        <li>Seznam použitých promptů</li>
+                        <li>Rozhodnutí: proč jste zvolili tento přístup?</li>
+                        <li>Korekce: co AI udělala špatně a jak jste to opravili?</li>
+                    </ul>
+
+                    <h3>🎯 Obhajoba:</h3>
+                    <ul class="defense">
+                        <li>Musíte být schopni vysvětlit každou část své práce</li>
+                        <li>Očekává se, že rozumíte všemu, co odevzdáte</li>
+                        <li>Nejasnosti = propad hodnocení</li>
+                    </ul>
+
+                    <h3>⚠️ Halucinace a chyby:</h3>
+                    <ul class="warning">
+                        <li>Vždy ověřte AI výstupy proti spolehlivým zdrojům</li>
+                        <li>Uvádějte zdroje tam, kde AI čerpala ze specifických dat</li>
+                        <li>Pochybnosti = lepší zeptat se než riskovat chybu</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Knihovna promptů - AI v pedagogické praxi</strong></p>
+            <p>Vladimíra Jurasová | <a href="mailto:mullerovav@fzp.czu.cz">mullerovav@fzp.czu.cz</a> | FŽP ČZU 2026</p>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast">✓ Prompt zkopírován do schránky!</div>
+
+    <script>
+        const prompts = {
+            1: "Jsi garant oboru s výhledem k roku 2030. Projdi tento sylabus a vytipuj 5 prvků, které pravděpodobně zastarají, 5 nadčasových kompetencí a 5 návrhů na úpravy (témata, dovednosti, typy úkolů). Výstup: tabulka Zastaralé | Nadčasové | Úprava | Důvod.",
+            2: "Simuluj průměrného studenta s přístupem k ChatGPT. Vyřeš toto zadání během 10 minut pouze na základě textu zadání. Uveď části, které nevyžadují porozumění, a navrhni 5 úprav, které vynutí hlubší rozhodování a obhajobu. Výstup: Slabina → Úprava → Zdůvodnění.",
+            3: "Přepiš zadání do dvou variant (standardní / pokročilá) tak, aby vyžadovalo lokální data, obhajobu předpokladů, návrh alternativy a reflexi chyb. Přidej mini-rubriku (3 kritéria, 0–3 body) a popiš očekávané důkazy porozumění.",
+            4: "Navrhni 10–12min diagnostiku k tématu [X]: 6 konceptuálních otázek, 3 úlohy na aplikaci a 3 krátké vysvětlení. U každé otázky přidej typickou chybnou odpověď, její interpretaci a mikro-aktivitu k nápravě.",
+            5: "Pro téma [X] vytvoř 8 otázek ve dvojicích: 'vysvětli jednoduše' a 'vysvětli odborně'. Zaměř se na odhalení porozumění mechanismům. Přidej 5 běžných miskoncepcí – ke každé uveď testovací otázku a stručnou opravu.",
+            6: "Jsem odborník na [A], potřebuji připravit výuku tématu [B] pro cílovou skupinu [XY]. Vytvoř 'bridge plan': 10 společných principů, 10 klíčových rozdílů, 8 klíčových pojmů (s jednovětou definicí), 6 případových scénářů a doporučené minimum zdrojů.",
+            7: "Chovej se jako sokratovský tutor k tématu [X]: nepodávej hotová řešení, ale ptej se naváděcími otázkami. Po každé odpovědi ověř pochopení, vyžádej si mezivýsledek a nabídni jen minimální nápovědu, pokud student tápe.",
+            8: "V roli oponenta vygeneruj 6 protiargumentů a 3 alternativní interpretace k tomuto tvrzení. Ke každému přidej ověřovací otázku k obhajobě předpokladů. Označ 2 častá slabá místa – např. v logice, datech nebo metodice.",
+            9: "Vygeneruj 50 variant této úlohy se stejnými výukovými cíli. Zachovej logiku a vyrovnanou obtížnost, ale uprav parametry tak, aby byl každý vstup unikátní. Výstup jako tabulka: ID | parametry | zadání | očekávaný výstup | kontrolní kritérium.",
+            10: "Navrhni 'evidence-of-learning' balíček k tomuto typu úkolu: co student odevzdá jako proces (max 10 řádků), 3 ověřovací kroky (zdroje, testy, revize) a mini-rubriku (porozumění / argumentace / ověření; 0–3 body). Přidej 2 příklady silného vs slabého důkazu.",
+            11: "Z těchto anonymizovaných odpovědí vytvoř diagnostiku: seskup odpovědi do 5–8 kategorií, najdi 5 typických chyb, uveď krátké komentáře k ukázkám (2 slabé, 1 silná odpověď). Navrhni 15min aktivitu na opravu dvou nejčastějších chyb.",
+            12: "Zkontroluj konzistenci hodnocení podle této rubriky: vyhledej případy, kdy podobné odpovědi dostaly různé body. Navrhni zpřesnění kritérií a uveď 3 příklady 'na hraně' s doporučenou zpětnou vazbou pro studenty.",
+            13: "Napiš stručná pravidla používání AI pro VŠ kurz (8–10 vět): co je povoleno, co ne, co musí student doložit jako proces, a jak probíhá obhajoba. Definuj také, jak postupovat při neověřených nebo halucinovaných výstupech AI."
+        };
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function copyPrompt(button, promptId) {
+            const promptText = prompts[promptId];
+            
+            navigator.clipboard.writeText(promptText).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+
+                button.classList.add('copied');
+                button.textContent = '✓ Zkopírováno!';
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    button.classList.remove('copied');
+                    button.textContent = '📋 Zkopírovat prompt';
+                }, 2000);
+            }).catch(err => {
+                alert('Nepodařilo se zkopírovat do schránky');
+            });
+        }
+    </script>
+</body>
+</html>
