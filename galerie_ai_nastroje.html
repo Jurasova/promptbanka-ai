@@ -53,8 +53,69 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Kategorie navigace */
+        .category-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .category-nav::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .category-nav::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 3px;
+        }
+
+        .category-nav::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 3px;
+        }
+
+        .category-nav-list {
+            display: flex;
+            gap: 10px;
+            padding: 0 20px;
+            flex-wrap: nowrap;
+        }
+
+        .category-nav-btn {
+            background: white;
+            border: 2px solid #D4AF37;
+            color: #2d3748;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .category-nav-btn:hover {
+            background: #D4AF37;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .category-nav-btn:active {
+            transform: translateY(0);
         }
         
         .intro h2 {
@@ -389,6 +450,20 @@
             <p>Najdete zde detailní popis doporučených nástrojů, jejich použití a odkazy.</p>
             <p style="margin-top: 15px;"><strong>💡 Tip:</strong> Začněte s 1-2 nástroji, které se vám nejvíc hodí. Postupně experimentujte s dalšími.</p>
         </div>
+
+        <!-- Navigace mezi kategoriemi -->
+        <nav class="category-nav">
+            <div class="category-nav-list">
+                <button class="category-nav-btn" onclick="scrollToCategory('chatboti')">🤖 Chatboti</button>
+                <button class="category-nav-btn" onclick="scrollToCategory('prompty')">✨ Vylepšování</button>
+                <button class="category-nav-btn" onclick="scrollToCategory('dokumenty')">📚 Dokumenty</button>
+                <button class="category-nav-btn" onclick="scrollToCategory('vizualizace')">🎨 Vizualizace</button>
+                <button class="category-nav-btn" onclick="scrollToCategory('interaktivita')">💬 Interaktivita</button>
+                <button class="category-nav-btn" onclick="scrollToCategory('vzdelavani')">🎓 Vzdělávání</button>
+                <button class="category-nav-btn" onclick="scrollToCategory('research')">🔍 Výzkum</button>
+                <button class="category-nav-btn" onclick="scrollToCategory('audio')">🎤 Audio</button>
+            </div>
+        </nav>
         
         <!-- KATEGORIE: CHATBOTI -->
         <div class="category-section" data-category="chatboti">
@@ -809,7 +884,7 @@
         
         <!-- KATEGORIE: RESEARCH A VYHLEDÁVÁNÍ -->
         <div class="category-section" data-category="research">
-            <h2 class="category-title">🔍 Research a vyhledávání</h2>
+            <h2 class="category-title">🔍 Výzkum a vyhledávání</h2>
             <div class="tools-grid">
                 
                 <!-- Perplexity -->
@@ -1106,6 +1181,26 @@
             <p style="margin-top: 25px; opacity: 0.8;">Vytvořeno pro konferenci "AI v rukách pedagoga" | FŽP ČZU | 2026</p>
         </footer>
     </div>
+
+    <script>
+        // Smooth scroll to category
+        function scrollToCategory(categoryId) {
+            const section = document.querySelector(`[data-category="${categoryId}"]`);
+            if (section) {
+                // Offset for sticky nav
+                const navHeight = document.querySelector('.category-nav').offsetHeight;
+                const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+                
+                window.scrollTo({
+                    top: sectionTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Add smooth scrolling behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
 
 </body>
 </html>
