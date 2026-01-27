@@ -349,7 +349,7 @@
     <div class="container">
         <header>
             <h1>📚 Knihovna promptů</h1>
-            <p>AI v pedagogické praxi | Vladimíra Jurasová, FŽP ČZU 2026</p>
+            <p>AI v pedagogické praxi</p>
         </header>
 
         <nav>
@@ -370,7 +370,7 @@
                         <div class="prompt-title">AUDIT KURZU 2030 (relevance za 5 let)</div>
                     </div>
                     <div class="prompt-text">
-                        "Jsi garant oboru s výhledem k roku 2030. Projdi tento sylabus a vytipuj 5 prvků, které pravděpodobně zastarají, 5 nadčasových kompetencí a 5 návrhů na úpravy (témata, dovednosti, typy úkolů). Výstup: tabulka Zastaralé | Nadčasové | Úprava | Důvod."
+                        "Jsi garant/ka VŠ předmětu s výhledem k roku 2030. Projdi níže uvedený sylabus (anotace, learning outcomes, obsah, formy výuky, úkoly, hodnocení, literatura) a navrhni: (1) 5 prvků, které pravděpodobně zastarají do 5 let (uveď typ: téma/aktivita/nástroj/hodnocení/literatura), (2) 5 nadčasových kompetencí relevantních pro obor a praxi/výzkum, (3) 5 konkrétních úprav kurzu v duchu constructive alignment (co změnit v obsahu, aktivitách nebo hodnocení, aby to lépe měřilo learning outcomes). U každé položky napiš stručný důvod (trend/změna + dopad na absolventa). Výstup: tabulka Kategorie | Položka | Návrh úpravy | Důvod. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Sylabus: [VLOŽTE SYLABUS]"
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 1)">📋 Zkopírovat prompt</button>
                 </div>
@@ -381,7 +381,7 @@
                         <div class="prompt-title">STRES-TEST ZADÁNÍ (AI to splní bez porozumění)</div>
                     </div>
                     <div class="prompt-text">
-                        "Simuluj průměrného studenta s přístupem k ChatGPT. Vyřeš toto zadání během 10 minut pouze na základě textu zadání. Uveď části, které nevyžadují porozumění, a navrhni 5 úprav, které vynutí hlubší rozhodování a obhajobu. Výstup: Slabina → Úprava → Zdůvodnění."
+                        "Simuluj průměrného studenta VŠ s přístupem k ChatGPT. Nejdřív zadání „splň" co nejsnáze pouze podle textu zadání (bez dohledávání a bez doplňujících dotazů), max 10 bodů / 200–300 slov, bez specifik oboru mimo zadání. Poté označ části zadání, které lze vyřešit bez skutečného porozumění (generické fráze, přepis, obecné definice, vágní doporučení). Nakonec navrhni 5 úprav zadání, které vynutí akademické rozhodování a obhajobu: jasnou metodu/postup, práci s důkazy (data, zdroje), explicitní předpoklady, trade-off, a kontrolu validity (limity, chyby, alternativy). Výstup: tabulka Slabina → Úprava → Jak poznám porozumění (důkaz) → Zdůvodnění. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Zadání: [VLOŽTE ZADÁNÍ]"
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 2)">📋 Zkopírovat prompt</button>
                 </div>
@@ -392,7 +392,7 @@
                         <div class="prompt-title">REDESIGN ZADÁNÍ (odolné vůči AI, měřitelné porozumění)</div>
                     </div>
                     <div class="prompt-text">
-                        "Přepiš zadání do dvou variant (standardní / pokročilá) tak, aby vyžadovalo lokální data, obhajobu předpokladů, návrh alternativy a reflexi chyb. Přidej mini-rubriku (3 kritéria, 0–3 body) a popiš očekávané důkazy porozumění."
+                        "Přepiš následující zadání do dvou variant pro VŠ: Standardní (minimální splnění LO) a Pokročilé (vyšší úroveň podle Bloomovy taxonomie: analýza/syntéza/evaluace). Obě varianty musí vyžadovat: (a) práci s konkrétním kontextem studenta (lokální data / vlastní mini-sběr / data z instituce / přiložený dataset), (b) explicitní předpoklady + jejich obhajobu, (c) minimálně 1 alternativní řešení a srovnání (trade-off), (d) krátkou reflexi limitů a chyb (validita, spolehlivost, etika/zkreslení). Přidej hodnoticí rubriku (3 kritéria, škála 0–3 body) a u každého kritéria specifikuj očekávané důkazy porozumění. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Zadání: [VLOŽTE ZADÁNÍ]"
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 3)">📋 Zkopírovat prompt</button>
                 </div>
@@ -400,10 +400,10 @@
                 <div class="prompt-card">
                     <div class="prompt-header">
                         <div class="prompt-number">4</div>
-                        <div class="prompt-title">VSTUPNÍ DIAGNOSTIKA (velké skupiny, základy + miskoncepce)</div>
+                        <div class="prompt-title">VSTUPNÍ DIAGNOSTIKA (velké skupiny)</div>
                     </div>
                     <div class="prompt-text">
-                        "Navrhni 10–12min diagnostiku k tématu [X]: 6 konceptuálních otázek, 3 úlohy na aplikaci a 3 krátké vysvětlení. U každé otázky přidej typickou chybnou odpověď, její interpretaci a mikro-aktivitu k nápravě."
+                        "Navrhni 10–12minutovou vstupní diagnostiku k tématu [X] pro úroveň [Bc./Mgr./PhD; ročník] a předpoklady [stručně]. Vytvoř: 6 konceptuálních otázek (MCQ nebo krátká odpověď), 3 úlohy na aplikaci a 3 krátké otevřené otázky „vysvětli proč" (ověření porozumění mechanismu). U každé položky uveď: správnou odpověď / očekávané jádro, typickou chybnou odpověď, interpretaci (miskoncepce) a mikro-aktivitu k nápravě (1–2 min, použitelná ve velké skupině). Na závěr přidej rychlé vyhodnocení (škálování A/B/C) a doporučení navazující podpory (co zadat skupině A/B/C). Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje."
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 4)">📋 Zkopírovat prompt</button>
                 </div>
@@ -414,7 +414,7 @@
                         <div class="prompt-title">ZNALOSTI BEZ POROZUMĚNÍ (odhalení principů)</div>
                     </div>
                     <div class="prompt-text">
-                        "Pro téma [X] vytvoř 8 otázek ve dvojicích: 'vysvětli jednoduše' a 'vysvětli odborně'. Zaměř se na odhalení porozumění mechanismům. Přidej 5 běžných miskoncepcí – ke každé uveď testovací otázku a stručnou opravu."
+                        "Pro téma [X] vytvoř 8 dvojic otázek: (A) „Vysvětli jednoduše" (max 2 věty, bez odborných termínů), (B) „Vysvětli odborně" (precizně, s mechanismem a správnými pojmy, max 5 vět; ne „složitě", ale přesně). Ke každé dvojici přidej „minimum pro plný bod" (1–3 klíčové body). Poté uveď 5 běžných miskoncepcí k tématu [X]: ke každé napiš testovací otázku, typickou chybnou odpověď a stručnou opravu (1–2 věty) + krátkou analogii vhodnou pro VŠ. Nepiš nic, co nelze odvodit z vložených podkladů; pokud něco chybí, uveď to jako předpoklad."
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 5)">📋 Zkopírovat prompt</button>
                 </div>
@@ -422,10 +422,10 @@
                 <div class="prompt-card">
                     <div class="prompt-header">
                         <div class="prompt-number">6</div>
-                        <div class="prompt-title">BRIDGE PLAN (učitel znalý A, potřebuje pokrýt B)</div>
+                        <div class="prompt-title">BRIDGE PLAN (učitel A → učí B)</div>
                     </div>
                     <div class="prompt-text">
-                        "Jsem odborník na [A], potřebuji připravit výuku tématu [B] pro cílovou skupinu [XY]. Vytvoř 'bridge plan': 10 společných principů, 10 klíčových rozdílů, 8 klíčových pojmů (s jednovětou definicí), 6 případových scénářů a doporučené minimum zdrojů."
+                        "Jsem odborník/ce na [A] a potřebuji připravit výuku tématu [B] pro cílovou skupinu [XY: Bc./Mgr.; ročník; předchozí znalosti; forma; ECTS nebo časová dotace]. Vytvoř „bridge plan": 10 společných principů (A ↔ B), 10 klíčových rozdílů (včetně typické chyby při přenosu z A do B), 8 klíčových pojmů (1 věta definice), 6 případových scénářů (situace → úkol → očekávaný výstup + jak by se hodnotil) a „minimum zdrojů" (3 základní + 2 prohloubení + 1 rychlý start). Nakonec navrhni pořadí výuky v 5 krocích včetně místa pro diagnostiku a typických „prahových" momentů, kde studenti nejčastěji chybují. Nepiš nic, co nelze odvodit z vložených podkladů; pokud něco chybí, uveď to jako předpoklad."
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 6)">📋 Zkopírovat prompt</button>
                 </div>
@@ -441,7 +441,7 @@
                         <div class="prompt-title">SOKRATOVSKÝ TUTOR (24/7, bez hotových odpovědí)</div>
                     </div>
                     <div class="prompt-text">
-                        "Chovej se jako sokratovský tutor k tématu [X]: nepodávej hotová řešení, ale ptej se naváděcími otázkami. Po každé odpovědi ověř pochopení, vyžádej si mezivýsledek a nabídni jen minimální nápovědu, pokud student tápe."
+                        "Chovej se jako sokratovský tutor pro VŠ k tématu [X]. Neposkytuj hotová řešení ani kompletní odpovědi. Veď studenta pomocí krátkých naváděcích otázek tak, aby sám odvodil postup, předpoklady a závěr. V každém kroku: (1) polož 1–2 otázky, (2) vyžádej si mezivýsledek (výpočet, definici, argument, plán postupu nebo interpretaci), (3) ověř pochopení krátkou kontrolní otázkou „proč?" nebo „jak víš, že…?". Pokud student tápe, nabídni pouze minimální nápovědu (1 věta nebo 1 vodítko) a znovu se zeptej. Pokud student žádá přímo řešení, odmítni ho dodat a místo toho nabídni první krok a otázku. Začni tím, že se zeptáš na cíl úlohy a co už student ví/umí k tématu [X]."
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 7)">📋 Zkopírovat prompt</button>
                 </div>
@@ -452,7 +452,7 @@
                         <div class="prompt-title">DISKUSNÍ OPONENT (argumentace + ověření)</div>
                     </div>
                     <div class="prompt-text">
-                        "V roli oponenta vygeneruj 6 protiargumentů a 3 alternativní interpretace k tomuto tvrzení. Ke každému přidej ověřovací otázku k obhajobě předpokladů. Označ 2 častá slabá místa – např. v logice, datech nebo metodice."
+                        "Jsi odborný oponent na VŠ. K následujícímu tvrzení vytvoř 6 věcných protiargumentů (ne karikatury), rozdělených ideálně napříč: definice/pojmy, logika, data/důkazy, metodika, alternativní vysvětlení, validita a limity. Dále uveď 3 alternativní interpretace tvrzení (jak by šlo chápat jinak) a stručně napiš, co by se změnilo v závěru. Ke každému protiargumentu i interpretaci přidej 1 ověřovací otázku, která nutí obhájit předpoklady nebo doložit důkazy. Nakonec označ 2 nejpravděpodobnější slabá místa v původním tvrzení (konkrétně: kde hrozí chyba v logice/datech/metodice) a napiš, jak je opravit. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Tvrzení: [VLOŽTE TVRZENÍ]"
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 8)">📋 Zkopírovat prompt</button>
                 </div>
@@ -463,9 +463,42 @@
                         <div class="prompt-title">VARIACE ZADÁNÍ (proti opisování, stejná obtížnost)</div>
                     </div>
                     <div class="prompt-text">
-                        "Vygeneruj 50 variant této úlohy se stejnými výukovými cíli. Zachovej logiku a vyrovnanou obtížnost, ale uprav parametry tak, aby byl každý vstup unikátní. Výstup jako tabulka: ID | parametry | zadání | očekávaný výstup | kontrolní kritérium."
+                        "Z této úlohy vytvoř sadu variant se stejnými výukovými cíli a srovnatelnou obtížností. Nejprve (stručně) identifikuj: (1) hlavní výukový cíl, (2) klíčovou dovednost, (3) kritické kroky řešení a (4) které parametry lze měnit bez změny obtížnosti. Poté vygeneruj [N] unikátních variant (např. 10), tak aby se měnily pouze povolené parametry a zůstala zachována stejná logika úlohy. Každá varianta musí být samostatně zadatelná a jednoznačná. Výstup dej jako tabulku: ID | Parametry (konkrétní hodnoty) | Zadání | Očekávaný výstup (výsledek/klíč/struktura) | Kontrolní kritérium (jak ověřit správnost). Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Původní úloha: [VLOŽTE ÚLOHU]"
                     </div>
                     <button class="copy-btn" onclick="copyPrompt(this, 9)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">10</div>
+                        <div class="prompt-title">ADAPTIVITA (úlohy podle výkonu studenta)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Navrhni adaptivní procvičování k tématu [X] pro úroveň [Bc./Mgr.; ročník]. Vstup: (a) learning outcomes (vložené níže), (b) typické chyby/miskoncepce (pokud jsou), (c) aktuální úroveň studenta: [A = slabé / B = střední / C = pokročilé] nebo krátký popis výsledků diagnostiky. Vytvoř 3 úrovně úloh (A/B/C): pro každou úroveň 3 úlohy (celkem 9), u každé uveď zadání, očekávaný výstup, nejčastější chybu a krátkou nápovědu po 1. neúspěchu. Přidej jednoduché pravidlo postupu (kdy student přejde výš, kdy se vrátí, kdy dostane vysvětlení) a krátký „feedback template" (2 věty) pro správně/částečně/špatně. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Learning outcomes: [VLOŽTE LO]"
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 10)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">11</div>
+                        <div class="prompt-title">TÝM STUDENT + AI (partner pro návrh a revizi řešení)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Chovej se jako spolupracující partner studenta na VŠ pro úlohu níže: pomoz navrhnout řešení, ale nenech studenta jen kopírovat hotový text. Postupuj ve 3 kolech: (1) nejdřív polož 3 cílené otázky, abys upřesnil/a kontext, předpoklady a kritéria kvality; (2) navrhni 2 možné přístupy (A/B) v bodech včetně trade-off a toho, jaké důkazy/data by byly potřeba; (3) po volbě studenta proveď „revizi": najdi 5 slabých míst (logika, data, metoda, validita, struktura), navrhni konkrétní úpravy a sepiš krátký change-log (co se změnilo a proč). Pokud student požádá o hotové kompletní řešení, dej místo toho osnovu + první krok + otázku na pokračování. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Úloha: [VLOŽTE ZADÁNÍ] / Podklady: [VLOŽTE]"
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 11)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">12</div>
+                        <div class="prompt-title">INKLUZE (okamžité přizpůsobení materiálů)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Uprav následující výukový materiál k tématu [X] pro VŠ tak, aby byl inkluzivní a přístupný (Universal Design for Learning). Vytvoř 3 varianty téhož obsahu: (1) „jednodušší verze" (B1 jazyk, kratší věty, vysvětlené pojmy), (2) „standardní verze" (běžná VŠ úroveň), (3) „pokročilá verze" (pro rychlejší studenty: rozšíření, doplňující otázky). Ke všem verzím přidej: klíčové pojmy (max 8) s krátkou definicí, 3 kontrolní otázky (porozumění), 1 krátký příklad z praxe a doporučení pro přístupnost (struktura nadpisů, odrážky, textové alternativy k obrázkům, jasné instrukce). Pokud materiál obsahuje kulturně/oborově specifické příklady, navrhni 2 alternativy, aby byly srozumitelné širšímu publiku. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Materiál: [VLOŽTE TEXT / SLIDY]"
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 12)">📋 Zkopírovat prompt</button>
                 </div>
             </div>
 
@@ -475,35 +508,79 @@
 
                 <div class="prompt-card">
                     <div class="prompt-header">
-                        <div class="prompt-number">10</div>
+                        <div class="prompt-number">13</div>
                         <div class="prompt-title">EVIDENCE-OF-LEARNING BALÍČEK (hodnotit proces, ne výsledek)</div>
                     </div>
                     <div class="prompt-text">
-                        "Navrhni 'evidence-of-learning' balíček k tomuto typu úkolu: co student odevzdá jako proces (max 10 řádků), 3 ověřovací kroky (zdroje, testy, revize) a mini-rubriku (porozumění / argumentace / ověření; 0–3 body). Přidej 2 příklady silného vs slabého důkazu."
+                        "Navrhni „evidence-of-learning" balíček pro tento typ úkolu na VŠ. Vytvoř: (1) co student odevzdá jako důkaz procesu (max 10 řádků, konkrétně pojmenované artefakty – např. rozhodovací log, verze, poznámky k předpokladům, test/ověření, revize), (2) 3 ověřovací kroky, které prokazují porozumění (např. práce se zdroji/dat, testy/validace, revize na základě zpětné vazby) včetně toho, co přesně má student ukázat, (3) mini-rubriku se 3 kritérii: Porozumění / Argumentace / Ověření (0–3 body) s krátkým popisem, co znamená 0, 2 a 3 body. Přidej 2 konkrétní příklady „silného" vs „slabého" důkazu procesu (v jedné větě každý). Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Typ úkolu / zadání: [VLOŽTE TEXT]"
                     </div>
-                    <button class="copy-btn" onclick="copyPrompt(this, 10)">📋 Zkopírovat prompt</button>
+                    <button class="copy-btn" onclick="copyPrompt(this, 13)">📋 Zkopírovat prompt</button>
                 </div>
 
                 <div class="prompt-card">
                     <div class="prompt-header">
-                        <div class="prompt-number">11</div>
+                        <div class="prompt-number">14</div>
                         <div class="prompt-title">DIAGNOSTIKA CELÉ SKUPINY (po testu)</div>
                     </div>
                     <div class="prompt-text">
-                        "Z těchto anonymizovaných odpovědí vytvoř diagnostiku: seskup odpovědi do 5–8 kategorií, najdi 5 typických chyb, uveď krátké komentáře k ukázkám (2 slabé, 1 silná odpověď). Navrhni 15min aktivitu na opravu dvou nejčastějších chyb."
+                        "Z následujících anonymizovaných odpovědí studentů vytvoř diagnostiku pro VŠ výuku: (1) seskup odpovědi do 5–8 kategorií podle typu uvažování/chyby (dej kategoriím názvy a stručný popis), (2) identifikuj 5 nejčastějších chyb nebo miskoncepcí a u každé uveď, co ji pravděpodobně způsobuje, (3) vyber a okomentuj ukázky: 2 slabé odpovědi a 1 silnou (krátký komentář: co chybí / co je dobré / jak to zlepšit), (4) navrhni 15min aktivitu do semináře/přednášky na opravu dvou nejčastějších chyb (struktura: cíl → postup po minutách → otázky pro studenty → rychlé ověření na konci). Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Odpovědi (anonymní): [VLOŽTE ODPOVĚDI]"
                     </div>
-                    <button class="copy-btn" onclick="copyPrompt(this, 11)">📋 Zkopírovat prompt</button>
+                    <button class="copy-btn" onclick="copyPrompt(this, 14)">📋 Zkopírovat prompt</button>
                 </div>
 
                 <div class="prompt-card">
                     <div class="prompt-header">
-                        <div class="prompt-number">12</div>
+                        <div class="prompt-number">15</div>
                         <div class="prompt-title">KALIBRACE HODNOCENÍ (konzistence v rozsáhlém souboru)</div>
                     </div>
                     <div class="prompt-text">
-                        "Zkontroluj konzistenci hodnocení podle této rubriky: vyhledej případy, kdy podobné odpovědi dostaly různé body. Navrhni zpřesnění kritérií a uveď 3 příklady 'na hraně' s doporučenou zpětnou vazbou pro studenty."
+                        "Zkontroluj konzistenci hodnocení podle této rubriky na vzorku hodnocených prací/odpovědí. Najdi případy, kdy velmi podobné odpovědi dostaly rozdílné body, a popiš, v čem je rubrika nejednoznačná nebo kde hodnotitelé pravděpodobně použili jiné měřítko. Výstup dej ve 3 částech: (1) tabulka „Pár podobných odpovědí": ID1 | skóre1 | ID2 | skóre2 | proč jsou podobné | kde vznikl rozdíl, (2) návrh zpřesnění rubriky (konkrétní přeformulování kritérií nebo doplnění kotvicích příkladů), (3) 3 „hraniční" příklady (typ odpovědi na hraně) s doporučeným bodovým ohodnocením a krátkou zpětnou vazbou pro studenty (2–3 věty, věcně a podpůrně). Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Rubrika: [VLOŽTE RUBRIKU] Hodnocené odpovědi (ID + text + body): [VLOŽTE DATA]"
                     </div>
-                    <button class="copy-btn" onclick="copyPrompt(this, 12)">📋 Zkopírovat prompt</button>
+                    <button class="copy-btn" onclick="copyPrompt(this, 15)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">16</div>
+                        <div class="prompt-title">TVORBA RUBRIK (konzistentní kritéria napříč pracemi)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Vytvoř hodnoticí rubriku pro VŠ úkol níže tak, aby byla konzistentní napříč hodnotiteli a měřila learning outcomes. Nejprve stručně identifikuj 3–5 klíčových learning outcomes, které úkol skutečně ověřuje. Poté navrhni rubriku se 4 kritérii (např. Porozumění, Argumentace, Metoda/Postup, Důkazy/Validita) a 4 úrovněmi výkonu (0–3 body). U každé úrovně napiš konkrétní popis pozorovatelných znaků (co musí být v práci vidět), přidej 1 „kotvicí" příklad formulace (typická věta/artefakt), a uveď nejčastější chybu, která spadá do nižší úrovně. Nakonec doplň doporučené váhy kritérií (pokud se hodí) a krátké pokyny pro hodnotitele (2–4 body), aby skórování bylo spravedlivé. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Zadání / typ výstupu: [VLOŽTE]"
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 16)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">17</div>
+                        <div class="prompt-title">ZPĚTNÁ VAZBA (rychlejší, přesnější, personalizovaná)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Jsi vyučující na VŠ a připravuješ zpětnou vazbu k práci studenta podle rubriky. Na základě vložené práce a rubriky vytvoř: (1) stručné shrnutí výkonu (2–3 věty), (2) 3 konkrétní silné stránky navázané na kritéria rubriky, (3) 3 konkrétní doporučení pro zlepšení ve formátu „Co změnit → Proč → Jak přesně to udělat", (4) 1–2 cílené otázky, které studenta povedou k reflexi a revizi, (5) krátký „feedforward" plán na příště (max 5 bodů). Nepřepisuj studentovu práci ani nedoplňuj obsah za něj; zaměř se na hodnocení kvality argumentu, metody, důkazů a struktury. Výstup napiš ve dvou verzích: A) krátká (do 120 slov) a B) detailní (do 250 slov). Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Rubrika: [VLOŽTE] Práce studenta: [VLOŽTE]"
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 17)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">18</div>
+                        <div class="prompt-title">SHLUKOVÁ ANALÝZA (vzorce v myšlení napříč odpověďmi)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Z následujících anonymizovaných odpovědí studentů vytvoř shlukovou analýzu (clustering) podle vzorců uvažování a kvality odpovědi. Seskup odpovědi do 5–8 shluků tak, aby každý shluk měl jasný společný rys (např. typ argumentu, typ chyby, použití pojmů, práce s důkazy/metodou). Pro každý shluk uveď: název, stručnou charakteristiku, odhad podílu odpovědí, 1–2 reprezentativní ukázky (krátké citace nebo parafráze), typickou miskoncepci/mezery a doporučený zásah ve výuce (1 mikro-aktivita nebo mini-vysvětlení). Na závěr napiš 3 „hotové komentáře" (feedback šablony) pro nejčastější shluky, které lze kopírovat studentům. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Odpovědi (anonymní): [VLOŽTE] Kritéria / očekávaná odpověď (pokud existuje): [VLOŽTE]"
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 18)">📋 Zkopírovat prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-number">19</div>
+                        <div class="prompt-title">REVIZE PŘEDMĚTU (co ponechat, co změnit)</div>
+                    </div>
+                    <div class="prompt-text">
+                        "Jsi garant/ka VŠ předmětu a děláš revizi po skončení semestru. Na základě vložených dat (studentská zpětná vazba, výsledky úloh/testů, distribuce bodů, účast, poznámky vyučujících, problémy s akademickou integritou/AI) zhodnoť, co v předmětu fungovalo a co ne. Výstup strukturovaně: (1) 5 věcí „ponechat" (proč fungují), (2) 5 věcí „změnit" (problém → dopad → návrh), (3) kontrola constructive alignment (learning outcomes ↔ aktivity ↔ hodnocení): kde je nesoulad a jak ho opravit, (4) 3 rychlé úpravy na příští semestr (low effort, high impact) a 3 systémové úpravy (vyšší náročnost), (5) návrh, jak upravit zadání/hodnocení, aby lépe měřilo porozumění i při použití AI (procesní důkazy, ověření, reflexe). Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Podklady: [VLOŽTE]"
+                    </div>
+                    <button class="copy-btn" onclick="copyPrompt(this, 19)">📋 Zkopírovat prompt</button>
                 </div>
             </div>
 
@@ -513,13 +590,13 @@
 
                 <div class="prompt-card">
                     <div class="prompt-header">
-                        <div class="prompt-number">13</div>
-                        <div class="prompt-title">PRAVIDLA PRO POUŽITÍ AI VE VÝUCE</div>
+                        <div class="prompt-number">20</div>
+                        <div class="prompt-title">PRAVIDLA PRO POUŽITÍ AI VE VÝUCE (VŠ kurz)</div>
                     </div>
                     <div class="prompt-text">
-                        "Napiš stručná pravidla používání AI pro VŠ kurz (8–10 vět): co je povoleno, co ne, co musí student doložit jako proces, a jak probíhá obhajoba. Definuj také, jak postupovat při neověřených nebo halucinovaných výstupech AI."
+                        "Napiš stručná pravidla používání AI pro VŠ kurz (8–10 vět) na základě následujícího kontextu: typ předmětu [Bc./Mgr.], typy úkolů [seminárky/projekty/testy], a cíle učení [LO]. Pravidla musí jasně vymezit: co je povoleno (např. nápady, struktura, jazykové korektury, kontrola chyb), co je zakázáno (např. odevzdání AI výstupu jako vlastního bez přiznání, generování dat/citací), co musí student doložit jako proces (např. log kroků, použité prompty, verze, zdroje a ověření), a jak probíhá obhajoba (krátký rozhovor, vysvětlení klíčových rozhodnutí, kontrolní otázky). Definuj také postup při neověřených nebo halucinovaných výstupech AI (povinnost ověřit, opravit, označit nejistoty; důsledky při opakování). Zahrň větu o akademické integritě a o tom, že student nese odpovědnost za obsah i při použití AI. Výstup napiš česky, srozumitelně a bez právnického stylu. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Kontext: [DOPLŇTE]"
                     </div>
-                    <button class="copy-btn" onclick="copyPrompt(this, 13)">📋 Zkopírovat prompt</button>
+                    <button class="copy-btn" onclick="copyPrompt(this, 20)">📋 Zkopírovat prompt</button>
                 </div>
 
                 <div class="rules-section">
