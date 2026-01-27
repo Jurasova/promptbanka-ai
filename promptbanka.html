@@ -125,6 +125,31 @@
             align-items: flex-start;
             margin-bottom: 15px;
             gap: 15px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .prompt-header:hover {
+            opacity: 0.8;
+        }
+
+        .prompt-header::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .prompt-card.expanded .prompt-header::after {
+            content: '▲';
         }
 
         .prompt-number {
@@ -156,6 +181,25 @@
             color: #4a5568;
             border: 1px solid #e2e8f0;
             line-height: 1.8;
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+            opacity: 1;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .prompt-card:not(.expanded) .prompt-text {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .prompt-card:not(.expanded) .copy-btn {
+            display: none;
         }
 
         .copy-btn {
@@ -191,6 +235,46 @@
             padding: 30px;
             border-radius: 10px;
             margin: 20px 0;
+        }
+
+        .rules-toggle {
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0 !important;
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+
+        .rules-toggle:hover {
+            opacity: 0.8;
+        }
+
+        .toggle-icon {
+            font-size: 1.2em;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .rules-section.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .rules-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .rules-section.expanded .rules-content {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 20px;
         }
 
         .rules-section h3 {
@@ -591,7 +675,7 @@
                 <div class="prompt-card">
                     <div class="prompt-header">
                         <div class="prompt-number">20</div>
-                        <div class="prompt-title">PRAVIDLA PRO POUŽITÍ AI VE VÝUCE (VŠ kurz)</div>
+                        <div class="prompt-title">PRAVIDLA PRO POUŽITÍ AI VE VÝUCE</div>
                     </div>
                     <div class="prompt-text">
                         "Napiš stručná pravidla používání AI pro VŠ kurz (8–10 vět) na základě následujícího kontextu: typ předmětu [Bc./Mgr.], typy úkolů [seminárky/projekty/testy], a cíle učení [LO]. Pravidla musí jasně vymezit: co je povoleno (např. nápady, struktura, jazykové korektury, kontrola chyb), co je zakázáno (např. odevzdání AI výstupu jako vlastního bez přiznání, generování dat/citací), co musí student doložit jako proces (např. log kroků, použité prompty, verze, zdroje a ověření), a jak probíhá obhajoba (krátký rozhovor, vysvětlení klíčových rozhodnutí, kontrolní otázky). Definuj také postup při neověřených nebo halucinovaných výstupech AI (povinnost ověřit, opravit, označit nejistoty; důsledky při opakování). Zahrň větu o akademické integritě a o tom, že student nese odpovědnost za obsah i při použití AI. Výstup napiš česky, srozumitelně a bez právnického stylu. Vycházej primárně z vložených podkladů. Co v podkladech není, jasně označ jako předpoklad nebo obecné doporučení a nevymýšlej konkrétní fakta, citace ani zdroje. Kontext: [DOPLŇTE]"
@@ -600,8 +684,9 @@
                 </div>
 
                 <div class="rules-section">
-                    <h3>💡 PŘÍKLAD PRAVIDEL (můžete použít jako výchozí bod)</h3>
-                    <p><strong>Pravidla pro použití AI v kurzu [NÁZEV]:</strong></p>
+                    <h3 class="rules-toggle">💡 PŘÍKLAD PRAVIDEL (můžete použít jako výchozí bod) <span class="toggle-icon">▼</span></h3>
+                    <div class="rules-content">
+                        <p><strong>Pravidla pro použití AI v kurzu [NÁZEV]:</strong></p>
 
                     <h3>✅ Co je povoleno:</h3>
                     <ul class="allowed">
@@ -638,6 +723,7 @@
                         <li>Uvádějte zdroje tam, kde AI čerpala ze specifických dat</li>
                         <li>Pochybnosti = lepší zeptat se než riskovat chybu</li>
                     </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -705,6 +791,33 @@
                 alert('Nepodařilo se zkopírovat do schránky');
             });
         }
+
+        // Toggle prompts collapse/expand
+        function togglePrompt(promptCard) {
+            promptCard.classList.toggle('expanded');
+        }
+
+        // Initialize: make all prompt headers clickable
+        document.addEventListener('DOMContentLoaded', function() {
+            const promptCards = document.querySelectorAll('.prompt-card');
+            
+            promptCards.forEach(card => {
+                const header = card.querySelector('.prompt-header');
+                header.addEventListener('click', function() {
+                    togglePrompt(card);
+                });
+            });
+
+            // Make rules section collapsible
+            const rulesToggle = document.querySelector('.rules-toggle');
+            const rulesSection = document.querySelector('.rules-section');
+            
+            if (rulesToggle && rulesSection) {
+                rulesToggle.addEventListener('click', function() {
+                    rulesSection.classList.toggle('expanded');
+                });
+            }
+        });
     </script>
 </body>
 </html>
