@@ -241,6 +241,37 @@
             content: "⚠️";
         }
 
+        .navigation-links {
+            background: #f7fafc;
+            padding: 30px;
+            text-align: center;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .navigation-links h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
         footer {
             background: #2d3748;
             color: white;
@@ -532,6 +563,12 @@
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <div class="navigation-links">
+            <h3>📚 Další zdroje</h3>
+            <a href="index.html" class="nav-button">🏠 Úvodní stránka</a>
+            <a href="galerie_ai_nastroje.html" class="nav-button">🛠️ Galerie AI nástrojů</a>
         </div>
 
         <footer>

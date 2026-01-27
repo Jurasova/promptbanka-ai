@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Toolkit - průvodce nástroji</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .author {
+            margin-top: 15px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #667eea;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .category-section {
+            margin-bottom: 50px;
+        }
+        
+        .category-title {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding: 15px 25px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .tool-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .tool-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .tool-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .tool-tagline {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        .tool-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tool-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .tool-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .tool-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #666;
+        }
+        
+        .tool-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .tool-best-for {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .tool-best-for strong {
+            color: #667eea;
+        }
+        
+        .tool-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .tool-link {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .tool-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tool-price {
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+        
+        .price-free {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .navigation-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .navigation-section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tips-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .tips-section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .tip-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .tip-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .tip-card ul {
+            list-style: none;
+        }
+        
+        .tip-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .tip-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+            }
+            
+            .filter-btn {
+                width: 100%;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Toolkit - průvodce nástroji</h1>
+            <p>Pro práci, výuku a výzkum</p>
+            <div class="author">Vladimíra Jurasová | FŽP ČZU | 2026</div>
+        </header>
+        
+        <div class="intro">
+            <h2>👋 Vítejte v galerii AI nástrojů!</h2>
+            <p>Najdete zde detailní popis doporučených nástrojů, jejich použití a odkazy.</p>
+            <p style="margin-top: 15px;"><strong>💡 Tip:</strong> Začněte s 1-2 nástroji, které se vám nejvíc hodí. Postupně experimentujte s dalšími.</p>
+        </div>
+        
+        <!-- KATEGORIE: CHATBOTI -->
+        <div class="category-section" data-category="chatboti">
+            <h2 class="category-title">🤖 Univerzální chatboti</h2>
+            <div class="tools-grid">
+                
+                <!-- ChatGPT -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🔥 Populární</div>
+                        <div class="tool-icon">💬</div>
+                        <div class="tool-name">ChatGPT</div>
+                        <div class="tool-tagline">OpenAI</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Univerzální nástroj pro tvorbu materiálů, brainstorming, 
+                            revizi textů a mnoho dalšího. Možnost vytvořit vlastní GPT asistenty.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Tvorba a revize výukových materiálů</li>
+                            <li>Brainstorming nápadů a aktivit</li>
+                            <li>Vytváření testů, zadání, příkladů</li>
+                            <li>Vlastní GPT asistenti (specializovaní pomocníci)</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Univerzální použití, začátečníky, tvorbu vlastních asistentů
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://chat.openai.com" target="_blank" class="tool-link">Otevřít ChatGPT →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gemini -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🔗 Integrace</div>
+                        <div class="tool-icon">✨</div>
+                        <div class="tool-name">Gemini</div>
+                        <div class="tool-tagline">Google</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            AI asistent od Google s přímou integrací do Google Workspace. 
+                            Vynikající pro práci s dokumenty, obrázky i videi.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Integrace s Google Docs, Sheets, Slides</li>
+                            <li>Multimodální (text, obrázek, video, audio)</li>
+                            <li>Research s propojením na Google</li>
+                            <li>Velmi rozsáhlý kontext</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Práci v Google ekosystému, multimodální analýzu
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://gemini.google.com" target="_blank" class="tool-link">Otevřít Gemini →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Claude -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📚 Dlouhý text</div>
+                        <div class="tool-icon">📄</div>
+                        <div class="tool-name">Claude</div>
+                        <div class="tool-tagline">Anthropic</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Vynikající pro práci s dlouhými texty a složitými úkoly. 
+                            Skvělý pro analýzu, kódování i tvorbu aplikací.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Analýza rozsáhlých textů a dokumentů</li>
+                            <li>Hloubková analýza a hodnocení</li>
+                            <li>Strukturované myšlení a detailní rozbory</li>
+                            <li>Práce s PDF dokumenty</li>
+                            <li>Kódování a tvorba aplikací</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Dlouhé texty, analýzu, kódování, komplexní úkoly
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://claude.ai" target="_blank" class="tool-link">Otevřít Claude →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Copilot -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🏢 Microsoft</div>
+                        <div class="tool-icon">🔷</div>
+                        <div class="tool-name">Copilot</div>
+                        <div class="tool-tagline">Microsoft</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            AI asistent integrovaný do Microsoft 365. Vhodný pro práci 
+                            v Word, PowerPoint a dalších Office aplikacích.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Integrace s Word, PowerPoint, Teams, Excel</li>
+                            <li>Vyhledávání s aktuálními informacemi</li>
+                            <li>Práce s dokumenty přímo v aplikacích</li>
+                            <li>Vytváření prezentací a dokumentů</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Práci v Microsoft ekosystému, Office 365
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://copilot.microsoft.com" target="_blank" class="tool-link">Otevřít Copilot →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- KATEGORIE: VYLEPŠOVÁNÍ PRÁCE S AI -->
+        <div class="category-section" data-category="prompty">
+            <h2 class="category-title">✨ Vylepšování práce s AI</h2>
+            <div class="tools-grid">
+                
+                <!-- Prompt Assistant -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🎯 Pro začátečníky</div>
+                        <div class="tool-icon">🔧</div>
+                        <div class="tool-name">Prompt Asistent</div>
+                        <div class="tool-tagline">Modely GPT</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Pomáhá vám psát lepší prompty. Transformuje jednoduché instrukce 
+                            na efektivní požadavky, které dávají přesnější výsledky.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Vylepšení vašich promptů na profesionální úroveň</li>
+                            <li>Návrhy lepších formulací</li>
+                            <li>Učí vás psát efektivní instrukce</li>
+                            <li>Iterativní vylepšování</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Začátečníky s AI, zvýšení kvality výstupů
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://chatgpt.com/g/g-hhh4w3eov-prompt-maker" target="_blank" class="tool-link">Otevřít Prompt Maker →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MetaPrompt -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">⚡ Optimalizace</div>
+                        <div class="tool-icon">🎨</div>
+                        <div class="tool-name">MetaPrompt</div>
+                        <div class="tool-tagline">Prompt Optimizer</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Pokročilý nástroj pro optimalizaci promptů. Analyzuje vaše instrukce 
+                            a vytváří vylepšené verze s jasnější strukturou a lepšími výsledky.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Analýza kontextu a požadavků</li>
+                            <li>Automatická optimalizace promptů</li>
+                            <li>Kladení upřesňujících otázek</li>
+                            <li>Srovnání původního a optimalizovaného promptu</li>
+                            <li>Testování promptů s AI odpověďmi</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Pokročilé uživatele, profesionální práci s AI
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://metaprompt.com" target="_blank" class="tool-link">Otevřít MetaPrompt →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- KATEGORIE: DOKUMENTY A ANALÝZA -->
+        <div class="category-section" data-category="dokumenty">
+            <h2 class="category-title">📚 Dokumenty a analýza</h2>
+            <div class="tools-grid">
+                
+                <!-- NotebookLM -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🎙️ Audio</div>
+                        <div class="tool-icon">📓</div>
+                        <div class="tool-name">NotebookLM</div>
+                        <div class="tool-tagline">Google</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Revoluční nástroj od Google. Nahrajete dokumenty a získáte audio souhrn 
+                            (podcast-style), myšlenkové mapy nebo interaktivní přehledy.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Audio souhrny v podcast formátu</li>
+                            <li>Myšlenkové mapy z vašich materiálů</li>
+                            <li>Zodpovídání otázek z dokumentů</li>
+                            <li>Citace a odkazy na původní text</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Transformaci materiálů do audio formátu, vytváření podcastů, zpřístupnění obsahu
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://notebooklm.google.com" target="_blank" class="tool-link">Otevřít NotebookLM →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- KATEGORIE: VIZUALIZACE -->
+        <div class="category-section" data-category="vizualizace">
+            <h2 class="category-title">🎨 Vizualizace a design</h2>
+            <div class="tools-grid">
+                
+                <!-- Napkin.ai -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">⚡ Rychlé</div>
+                        <div class="tool-icon">📊</div>
+                        <div class="tool-name">Napkin.ai</div>
+                        <div class="tool-tagline">AI Infografiky</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Zadáte text, během sekund získáte profesionální infografiku nebo diagram. 
+                            Skvělé pro rychlou vizualizaci složitých konceptů.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Text → infografika během sekund</li>
+                            <li>Flowcharty, mindmapy, timeline...</li>
+                            <li>Různé styly a barevné schéma</li>
+                            <li>Export do prezentací</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Rychlou vizualizaci, infografiky, diagramy
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://napkin.ai" target="_blank" class="tool-link">Otevřít Napkin.ai →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ideogram -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🎨 Kreativní</div>
+                        <div class="tool-icon">🖼️</div>
+                        <div class="tool-name">Ideogram</div>
+                        <div class="tool-tagline">AI Obrázky s textem</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Generuje obrázky s textem a nápisy. Zvládá začlenění textu 
+                            do obrázků lépe než jiné AI nástroje (postery, infografiky).
+                        </div>
+                        <ul class="tool-features">
+                            <li>Přesná typografie v obrázcích</li>
+                            <li>Postery, ilustrace, vizuály</li>
+                            <li>Různé styly (realistické, ilustrační)</li>
+                            <li>Vysoká kvalita výstupů</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Vizuály s textem, postery, grafiku
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://ideogram.ai" target="_blank" class="tool-link">Otevřít Ideogram →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Canva -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🎨 Kreativní</div>
+                        <div class="tool-icon">🖌️</div>
+                        <div class="tool-name">Canva</div>
+                        <div class="tool-tagline">Design pro každého</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Komplexní designový nástroj s AI funkcemi. Tvorba prezentací, 
+                            posterů, infografik, pracovních listů a mnoho dalšího.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Šablony pro prezentace, postery, materiály</li>
+                            <li>AI generování obrázků (Magic Media)</li>
+                            <li>AI úprava fotografií a odstranění pozadí</li>
+                            <li>Text-to-Image a další AI funkce</li>
+                            <li>Obrovská knihovna prvků</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Komplexní tvorbu vizuálních materiálů, pracovní listy, postery
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://www.canva.com" target="_blank" class="tool-link">Otevřít Canva →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gamma.app -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📊 Prezentace</div>
+                        <div class="tool-icon">🎯</div>
+                        <div class="tool-name">Gamma.app</div>
+                        <div class="tool-tagline">AI Prezentace</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Vytváří profesionální prezentace automaticky z textu nebo osnovy. 
+                            Nabízí moderní předpřipravené designy.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Automatická tvorba prezentací</li>
+                            <li>Krásné moderní designy</li>
+                            <li>Interaktivní webové prezentace</li>
+                            <li>Export do PDF nebo PowerPoint</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Rychlou tvorbu prezentací, moderní design
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://gamma.app" target="_blank" class="tool-link">Otevřít Gamma.app →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- KATEGORIE: INTERAKTIVITA A ZPĚTNÁ VAZBA -->
+        <div class="category-section" data-category="interaktivita">
+            <h2 class="category-title">💬 Interaktivita a zpětná vazba</h2>
+            <div class="tools-grid">
+                
+                <!-- Mentimeter -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📊 Živá data</div>
+                        <div class="tool-icon">📱</div>
+                        <div class="tool-name">Mentimeter</div>
+                        <div class="tool-tagline">Interaktivní prezentace</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Interaktivní nástroj pro ankety, kvízy a sběr okamžité zpětné vazby, 
+                            který slouží jako základ pro diskuzi a reflexi v hodině.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Real-time hlasování a ankety</li>
+                            <li>Kvízy s okamžitým vyhodnocením</li>
+                            <li>Word clouds a Q&A session</li>
+                            <li>Diagnostika znalostí studentů</li>
+                            <li>Snadné zapojení přes mobil</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Aktivizaci studentů, okamžitou zpětnou vazbu, diskuze
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://www.mentimeter.com" target="_blank" class="tool-link">Otevřít Mentimeter →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- KATEGORIE: VZDĚLÁVACÍ NÁSTROJE -->
+        <div class="category-section" data-category="vzdelavani">
+            <h2 class="category-title">🎓 Vzdělávací nástroje</h2>
+            <div class="tools-grid">
+                
+                <!-- ChatTube -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📹 Video</div>
+                        <div class="tool-icon">🎬</div>
+                        <div class="tool-name">ChatTube</div>
+                        <div class="tool-tagline">Analýza YouTube videí</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Umožňuje studentům vložit odkaz na odborné video a následně se dotazovat 
+                            na jeho obsah nebo si projít kompletní přepis (transkript).
+                        </div>
+                        <ul class="tool-features">
+                            <li>Analýza YouTube videí pomocí AI</li>
+                            <li>Automatický přepis (transkript)</li>
+                            <li>Dotazování na obsah videa</li>
+                            <li>Shrnutí klíčových bodů</li>
+                            <li>Časové značky důležitých momentů</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Práci s video materiály, přístupnost obsahu
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://chattube.io" target="_blank" class="tool-link">Otevřít ChatTube →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- KATEGORIE: RESEARCH A VYHLEDÁVÁNÍ -->
+        <div class="category-section" data-category="research">
+            <h2 class="category-title">🔍 Research a vyhledávání</h2>
+            <div class="tools-grid">
+                
+                <!-- Perplexity -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">⚡ Aktuální</div>
+                        <div class="tool-icon">🔎</div>
+                        <div class="tool-name">Perplexity</div>
+                        <div class="tool-tagline">AI vyhledávač</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Vyhledávač, který kombinuje schopnosti chatbota s aktuálním vyhledáváním 
+                            na webu a je vhodný pro rychlé ověřování informací.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Aktuální informace z webu</li>
+                            <li>Automatické citace zdrojů</li>
+                            <li>Shrnutí z více zdrojů najednou</li>
+                            <li>Follow-up otázky</li>
+                            <li>Ověřování faktů</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Rychlý research, ověřování informací, aktuální data
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://www.perplexity.ai" target="_blank" class="tool-link">Otevřít Perplexity →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Consensus -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📚 Vědecké</div>
+                        <div class="tool-icon">🔬</div>
+                        <div class="tool-name">Consensus</div>
+                        <div class="tool-tagline">Vyhledávání výzkumů</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            AI nástroj pro vyhledávání a analýzu vědeckých výzkumů. 
+                            Poskytuje shrnutí z recenzovaných článků.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Vyhledávání vědeckých studií</li>
+                            <li>Shrnutí z peer-reviewed článků</li>
+                            <li>Analýza konsenzu ve výzkumu</li>
+                            <li>Přímé citace z publikací</li>
+                            <li>Syntéza poznatků z více studií</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Vědecký výzkum, literature review, fact-checking
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://consensus.app" target="_blank" class="tool-link">Otevřít Consensus →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Elicit -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📖 Výzkum</div>
+                        <div class="tool-icon">📝</div>
+                        <div class="tool-name">Elicit</div>
+                        <div class="tool-tagline">AI research asistent</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            AI asistent pro vědeckou práci. Pomáhá s literaturou, 
+                            analýzou článků a syntézou výzkumných poznatků.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Vyhledávání relevantních článků</li>
+                            <li>Automatická extrakce klíčových dat</li>
+                            <li>Tabulkové přehledy studií</li>
+                            <li>Porovnání metodologií</li>
+                            <li>Identifikace research gaps</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Literature review, systematické přehledy, analýzu studií
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://elicit.com" target="_blank" class="tool-link">Otevřít Elicit →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SciSpace -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📄 Články</div>
+                        <div class="tool-icon">🧪</div>
+                        <div class="tool-name">SciSpace</div>
+                        <div class="tool-tagline">Čtení vědeckých článků</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            AI asistent pro práci s vědeckými články. Vysvětluje složité pasáže, 
+                            matematiku a terminologii.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Vysvětlení složitých částí článku</li>
+                            <li>Matematické rovnice krok za krokem</li>
+                            <li>Definice odborných termínů</li>
+                            <li>Shrnutí článků</li>
+                            <li>Dotazování na PDF dokumenty</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Čtení a pochopení vědeckých článků, výuku složitých témat
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://scispace.com" target="_blank" class="tool-link">Otevřít SciSpace →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RabbitResearch -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🔍 Rychlé</div>
+                        <div class="tool-icon">🐰</div>
+                        <div class="tool-name">Rabbit Research</div>
+                        <div class="tool-tagline">Rychlý research</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Nástroj pro rychlý research a sběr informací z více zdrojů. 
+                            Vytváří přehledné reporty.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Automatický sběr informací</li>
+                            <li>Agregace z více zdrojů</li>
+                            <li>Strukturované reporty</li>
+                            <li>Citace a odkazy</li>
+                            <li>Rychlé zpracování témat</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Úvodní research, přehled tématu, sběr zdrojů
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://rabbitresear.ch" target="_blank" class="tool-link">Otevřít Rabbit Research →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- KATEGORIE: AUDIO -->
+        <div class="category-section" data-category="audio">
+            <h2 class="category-title">🎙️ Audio a hlas</h2>
+            <div class="tools-grid">
+                
+                <!-- Whisper Flow -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">📝 Přepis</div>
+                        <div class="tool-icon">🎤</div>
+                        <div class="tool-name">Whisper Flow</div>
+                        <div class="tool-tagline">Transkripce audio</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Přesný nástroj pro převod audio a video nahrávek na text. 
+                            Ideální pro vytváření přepisů přednášek nebo analýzu rozhovorů.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Přesná transkripce audio a video</li>
+                            <li>Podpora více jazyků včetně češtiny</li>
+                            <li>Automatické časové značky</li>
+                            <li>Export do různých formátů</li>
+                            <li>Zpracování dlouhých nahrávek</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Přepisy přednášek, rozhovorů, vytváření titulků
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://whisperflow.ai" target="_blank" class="tool-link">Otevřít Whisper Flow →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ElevenLabs -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-badge">🔊 Profesionální</div>
+                        <div class="tool-icon">🎙️</div>
+                        <div class="tool-name">ElevenLabs</div>
+                        <div class="tool-tagline">Text-to-Speech</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-description">
+                            Nejlepší text-to-speech nástroj. Vytváří naprosto realistické hlasy 
+                            v různých jazycích. Můžete i naklonovat svůj vlastní hlas.
+                        </div>
+                        <ul class="tool-features">
+                            <li>Realistické hlasy v mnoha jazycích</li>
+                            <li>Klonování vlastního hlasu</li>
+                            <li>Dubbing videí do jiných jazyků</li>
+                            <li>Profesionální kvalita</li>
+                        </ul>
+                        <div class="tool-best-for">
+                            <strong>Nejlepší pro:</strong> Audio materiály, podcasty, přístupnost
+                        </div>
+                        <div class="tool-footer">
+                            <a href="https://elevenlabs.io" target="_blank" class="tool-link">Otevřít ElevenLabs →</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- NAVIGATION SECTION -->
+        <div class="navigation-section">
+            <h2>📚 Další zdroje</h2>
+            <a href="index.html" class="nav-button">🏠 Úvodní stránka</a>
+            <a href="promptbanka.html" class="nav-button">📚 Promptbanka</a>
+        </div>
+        
+        <!-- TIPS SECTION -->
+        <div class="tips-section">
+            <h2>💡 Praktické tipy pro začátek</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>🚀 Jak začít?</h3>
+                    <ul>
+                        <li>Začněte s ChatGPT nebo Gemini</li>
+                        <li>Vyzkoušejte 3× denně na běžné úkoly</li>
+                        <li>Pozorujte, co funguje a co ne</li>
+                        <li>Postupně přidávejte další nástroje</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>📝 Pro přípravu výuky</h3>
+                    <ul>
+                        <li>ChatGPT/Gemini - brainstorming materiálů</li>
+                        <li>Gamma.app - rychlé prezentace</li>
+                        <li>Napkin.ai - vizualizace konceptů</li>
+                        <li>Prompt asistent - lepší výsledky</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🎓 Pro výuku</h3>
+                    <ul>
+                        <li>Mentimeter - okamžitá zpětná vazba a aktivizace</li>
+                        <li>NotebookLM - audio souhrny materiálů</li>
+                        <li>Ideogram - vizuály a postery</li>
+                        <li>ElevenLabs - audio verze textů</li>
+                        <li>Claude - chyby v AI výstupu (cvičení)</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>✅ Pro hodnocení</h3>
+                    <ul>
+                        <li>Claude - analýza dlouhých prací</li>
+                        <li>ChatGPT - konzistentní hodnocení</li>
+                        <li>Gemini - práce s Google Docs</li>
+                        <li>Hodnoťte PROCES, ne jen výsledek</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🔐 Bezpečnost</h3>
+                    <ul>
+                        <li>Anonymizujte jména studentů</li>
+                        <li>Nenahrajte citlivé dokumenty</li>
+                        <li>Zkontrolujte AI výstupy (halucinace)</li>
+                        <li>Citujte použití AI</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>⚡ Efektivita práce</h3>
+                    <ul>
+                        <li>Kombinujte nástroje podle úkolu</li>
+                        <li>Vytvořte si vlastní workflow</li>
+                        <li>Experimentujte a hledejte co vám vyhovuje</li>
+                        <li>Sdílejte zkušenosti s kolegy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p style="font-size: 1.3em; margin-bottom: 15px;"><strong>Zůstaňme v kontaktu!</strong></p>
+            <p>📧 Email: <a href="mailto:mullerovav@fzp.czu.cz">mullerovav@fzp.czu.cz</a></p>
+            <p>🔗 Promptbanka a další materiály: <a href="promptbanka.html">odkaz</a></p>
+            <p style="margin-top: 25px; opacity: 0.8;">Vytvořeno pro konferenci "AI v rukách pedagoga" | FŽP ČZU | 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
+
